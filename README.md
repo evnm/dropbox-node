@@ -6,7 +6,11 @@ An OAuth-enabled node.js client for working with the Dropbox API.
 
 dropbox-node depends on [`node-oauth`](http://github.com/ciaranj/node-oauth).
 
-To install, download the module and create a symlink in `~/.node_libraries`:
+To install via npm
+
+    npm install dropbox
+
+To install by hand, download the module and create a symlink in `~/.node_libraries`
 
     $ ln -s /path/to/dropbox-node/ ~/.node_libraries/dropbox-node
 
