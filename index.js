@@ -1,1 +1,1 @@
-module.exports = require('./lib/dropbox-node')
+module.exports = require('./lib/dropbox-node');
