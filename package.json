@@ -1,6 +1,6 @@
 {
   'name': 'dropbox',
-  'version': '0.0.2',
+  'version': '0.0.3',
   'description': 'A node.js client module for the official Dropbox API',
   'homepage': 'http://github.com/evnm/dropbox-node',
   'author': {
