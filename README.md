@@ -61,7 +61,7 @@ Here's an example where we upload a file and remotely move it around before dele
     })
     
     // Delete the file.
-    dropbox.delete('Public/foo.txt', function(err, data) {
+    dropbox.deleteItem('Public/foo.txt', function(err, data) {
       if (err) console.log('Error: ' + sys.inspect(err))
     })
 
