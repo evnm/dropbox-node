@@ -16,7 +16,7 @@ To install by hand, download the module and create a symlink in `~/.node_librari
 
 ## Usage
 
-To start, you'll need to grab a consumer key and secret from [developers.dropbox.com](developers.dropbox.com).
+To start, you'll need to grab a consumer key and secret from [dropbox.com/developers](https://dropbox.com/developers).
 
 ### OAuth credentials and object construction
 
