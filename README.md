@@ -73,4 +73,5 @@ Run specs with `node specs.js` from the root `dropbox-node` directory.
 
 ## TODO
 * Improve test coverage.
+* Improve documentation.
 * Add ability to interact with application sandboxes.
