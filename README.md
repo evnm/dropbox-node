@@ -28,11 +28,11 @@ First construct an OAuth client and acquire a valid access token and access toke
         oauth = new OAuth('http://api.dropbox.com/0/oauth/request_token',
                           'http://api.dropbox.com/0/oauth/access_token',
                           consumer_key, consumer_secret,
-                          '1.0', null, 'HMAC-SHA1')
+                          '1.0', null, 'HMAC-SHA1');
 
 Now create a DropboxClient object.
 
-    var dropbox = new DropboxClient(oauth, access_token, access_token_secret)
+    var dropbox = new DropboxClient(oauth, access_token, access_token_secret);
 
 ### Calling API methods
 
@@ -41,29 +41,28 @@ Now create a DropboxClient object.
 For example, to fetch and print the display name and email address associated with your account:
 
     dropbox.getAccountInfo(function(err, data) {
-      if (err) console.log('Error: ' + sys.inspect(err))
+      if (err) console.log('Error: ' + sys.inspect(err));
       else {
-        var data_json = eval('(' + data + ')')
-        console.log(data_json.display_name + ', ' + data_json.email)
+        console.log(data.display_name + ', ' + data.email);
       }
-    })
+    });
 
 Here's an example where we upload a file and remotely move it around before deleting it.
 
     // Upload foo.txt to the Dropbox root directory.
     dropbox.putFile('foo.txt', '', function(err, data) {
-      if (err) console.log('Error: ' + sys.inspect(err))
-    })
+      if (err) console.log('Error: ' + sys.inspect(err));
+    });
     
     // Move it into the Public directory.
     dropbox.move('foo.txt', 'Public/foo.txt', function(err, data) {
-      if (err) console.log('Error: ' + sys.inspect(err))
-    })
+      if (err) console.log('Error: ' + sys.inspect(err));
+    });
     
     // Delete the file.
     dropbox.deleteItem('Public/foo.txt', function(err, data) {
-      if (err) console.log('Error: ' + sys.inspect(err))
-    })
+      if (err) console.log('Error: ' + sys.inspect(err));
+    });
 
 ## Testing
 
