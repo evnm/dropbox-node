@@ -47,7 +47,7 @@ For example, to fetch and print the display name and email address associated wi
       }
     });
 
-Here's an example where we upload a file and remotely move it around before deleting it.
+Here we upload a file and remotely move it around before deleting it.
 
     // Upload foo.txt to the Dropbox root directory.
     dropbox.putFile('foo.txt', '', function(err, data) {
@@ -65,6 +65,8 @@ Here's an example where we upload a file and remotely move it around before dele
         });
       }
     });
+
+For a more practical example, check out this [walkthrough of building a simple Dropbox file browser](http://evanmeagher.net/2010/10/dropbox-file-browser).
 
 ## Testing
 
