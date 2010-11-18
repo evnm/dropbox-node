@@ -51,17 +51,19 @@ Here's an example where we upload a file and remotely move it around before dele
 
     // Upload foo.txt to the Dropbox root directory.
     dropbox.putFile('foo.txt', '', function(err, data) {
-      if (err) console.log('Error: ' + sys.inspect(err));
-    });
-    
-    // Move it into the Public directory.
-    dropbox.move('foo.txt', 'Public/foo.txt', function(err, data) {
-      if (err) console.log('Error: ' + sys.inspect(err));
-    });
-    
-    // Delete the file.
-    dropbox.deleteItem('Public/foo.txt', function(err, data) {
-      if (err) console.log('Error: ' + sys.inspect(err));
+      if (err) console.error(err.stack);
+      else {
+        // Move it into the Public directory.
+        dropbox.move('foo.txt', 'Public/foo.txt', function(err, data) {
+          if (err) console.error(err.stack);
+          else {
+            // Delete the file.
+            dropbox.deleteItem('Public/foo.txt', function(err, data) {
+              if (err) console.error(err.stack);
+            });    
+          }
+        });
+      }
     });
 
 ## Testing
