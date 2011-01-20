@@ -55,7 +55,7 @@ Here we upload a file and remotely move it around before deleting it.
 
           // Delete the file.
           dropbox.deleteItem('Public/foo.txt', function (err, data) {
-            if (err) console.error(err.stack);
+            if (err) console.error(err.stack)
           })
         })
       })
