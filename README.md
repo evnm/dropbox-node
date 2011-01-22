@@ -84,6 +84,7 @@ dropbox-node depends on [jasmine-node](http://github.com/mhevery/jasmine-node) f
 Run specs with `node specs.js` from the root `dropbox-node` directory.
 
 ## TODO
+* Rewrite `getFile` to use streams.
 * Improve test coverage.
 * Improve documentation.
 * Add ability to interact with application sandboxes.
