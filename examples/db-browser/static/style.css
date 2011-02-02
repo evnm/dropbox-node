@@ -1,0 +1,14 @@
+body {
+  font-family: "Helvetica", "Lucida Grande", "sans-serif';
+  font-size: 13px;
+  padding: 0;}
+
+div#wrapper {
+  margin: 0 auto;
+  padding: 25px;
+  width: 500px;
+  border: 3px solid #eee;}
+
+h1 {
+  text-shadow: 1px 2px 2px #ddd;
+  font-size: 24px;}
