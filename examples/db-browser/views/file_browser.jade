@@ -5,6 +5,6 @@ ul#dir_contents
     li
       - if(item.is_dir)
         a(href: '/file_browser' + item.path) #{item.path}
-      - else                                                                            
-        #{item.path}
+      - else                                                                    
+        #{item.path} (#{item.size})
   - })
