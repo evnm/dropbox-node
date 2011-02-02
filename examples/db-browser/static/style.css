@@ -1,14 +1,16 @@
 body {
-  font-family: "Helvetica", "Lucida Grande", "sans-serif';
+  font-family: "Gill Sans", Verdana;
   font-size: 13px;
-  padding: 0;}
+  padding: 0;
+  background-color: #fff;}
 
 div#wrapper {
   margin: 0 auto;
   padding: 25px;
   width: 500px;
-  border: 3px solid #eee;}
+  border: 3px solid #eee;
+  background-color: #fefefe;}
 
 h1 {
-  text-shadow: 1px 2px 2px #ddd;
-  font-size: 24px;}
+  font-size: 24px;
+  color: #333;}
