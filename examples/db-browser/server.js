@@ -1,3 +1,12 @@
+// read dropbox key and secret from the command line:
+var consumer_key = process.argv[2];
+var consumer_secret = process.argv[3];
+
+if (consumer_key == undefined || consumer_secret == undefined) {
+	console.log("Please invoke with node server.js <dropbox key> <dropbox secret>");
+	process.exit(1);
+}
+
 // add lib to modules search path:
 require.paths.unshift(require("path").join(__dirname, "../../lib"));
 require.paths.unshift(require("path").join(__dirname, "../../vendor"));
@@ -7,9 +16,7 @@ console.log("PATHS: " + require.paths);
 var sys = require('sys'),
   DropboxClient = require('dropbox-node').DropboxClient,
   express = require('express'),
-  app = express.createServer(),
-  consumer_key = 'xrekih22vltowwe',
-  consumer_secret = 'qh4a88dqavl14ys';
+  app = express.createServer();
 
 // "static" will contain the static resources
 var pub = __dirname + '/static';
