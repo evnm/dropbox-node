@@ -1,0 +1,27 @@
+body {
+  font-family: "Gill Sans", Verdana;
+  font-size: 13px;
+  padding: 0;
+  background-color: #fff;}
+
+div#wrapper {
+  margin: 0 auto;
+  padding: 25px;
+  width: 500px;
+  border: 3px solid #eee;
+  background-color: #fefefe;}
+
+h1 {
+  font-size: 24px;
+  color: #333;}
+
+label {
+  float: left;
+  width: 5em;
+  margin-right: 1em;}
+
+input.submit {
+  line-height: 16px;
+  background-color: #eee;
+  border: 1px solid;
+  border-color: #111;}

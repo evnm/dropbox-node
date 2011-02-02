@@ -1,0 +1,10 @@
+h1 Enter your Dropbox credentials
+form(method: 'post', action: '/process_creds')
+  div
+    label(for: 'email') Email:
+    input(type: 'text', name: 'email', id:'email')
+  div
+    label(for: 'password') Password:
+    input(type: 'password', name: 'password', id:'password')
+  div#editArticleSubmit
+    input(type: 'submit', value: 'Login', class: 'submit')
