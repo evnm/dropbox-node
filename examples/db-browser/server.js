@@ -22,7 +22,8 @@ var app = express.createServer(
   express.logger(),									
   express.bodyDecoder(),								
   express.cookieDecoder(),
-  express.session()
+  express.session({key: 'skey',
+                         secret: '1ts-s3cr3t!'})
 );
 	
 // use Jade as our default template engine
