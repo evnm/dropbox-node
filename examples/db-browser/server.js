@@ -7,14 +7,8 @@ if (consumer_key == undefined || consumer_secret == undefined) {
 	process.exit(1);
 }
 
-// add lib to modules search path:
-require.paths.unshift(require("path").join(__dirname, "../../lib"));
-require.paths.unshift(require("path").join(__dirname, "../../vendor"));
-// just to prove it:
-console.log("PATHS: " + require.paths);
-
 var sys = require('sys'),
-  DropboxClient = require('dropbox-node').DropboxClient,
+  DropboxClient = require('../../lib/dropbox-node').DropboxClient,
   express = require('express'),
   app = express.createServer();
 
@@ -42,7 +36,9 @@ app.configure(function(){
 // Login page.
 app.get('/', function (req, res) {
   res.render('login', {
-    title: 'Dropbox File Browser'
+	locals: {
+    	title: 'Dropbox File Browser'
+	}
   })
 })
 
@@ -64,9 +60,11 @@ app.get('/file_browser(/*)?', function (req, res) {
       if (err) return console.log('Error: ' + sys.inspect(err))
       // NOTE: Use this to strip leading path(s): str.replace(/^.*\//g, '')
       res.render('file_browser', {
-		title: 'Dropbox File Browser',
-		current_dir: (metadata.path.length > 0) ? metadata.path : 'root',
-		items: metadata.contents
+		locals: {
+			title: 'Dropbox File Browser',
+			current_dir: (metadata.path.length > 0) ? metadata.path : 'root',
+			items: metadata.contents
+		}
       })
     })
   } else res.redirect('home')

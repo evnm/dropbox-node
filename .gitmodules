@@ -1,9 +1,0 @@
-[submodule "vendor/oauth"]
-	path = vendor/oauth
-	url = https://github.com/ciaranj/node-oauth.git
-[submodule "vendor/jade"]
-	path = vendor/jade
-	url = https://github.com/visionmedia/jade.git
-[submodule "vendor/express"]
-	path = vendor/express
-	url = https://github.com/visionmedia/express.git
