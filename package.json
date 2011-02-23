@@ -1,6 +1,6 @@
 {
   "name": "dropbox",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A node.js client module for the official Dropbox API",
   "keywords": [
     "cloud",
@@ -13,7 +13,7 @@
   "main": "index",
   "repository": {
     "type": "git",
-    "url": "http://github.com/evnm/dropbox-node.git"
+    "url": "git://github.com/evnm/dropbox-node.git"
   },
   "scripts": {
     "test": "node specs.js"
