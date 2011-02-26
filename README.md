@@ -27,24 +27,29 @@ First construct a DropboxClient object, passing in the consumer key and secret.
 
     var dropbox = new DropboxClient(consumer_key, consumer_secret)
 
-Before calling any Dropbox API methods, `getAccessToken` must be called in order to initialize the OAuth credentials.
+Before calling any Dropbox API methods, an access token pair must be obtained. This can be done one of two ways:
 
-    dropbox.getAccessToken(dropbox_email, dropbox_password, callback)
+  1. If the access token and secret are known a priori, they can be passed directly into the DropboxClient constructor.
+
+        var dropbox = new DropboxClient(consumer_key, consumer_secret,
+                                        access_token, access_token_secret)
+
+  2. Otherwise, `getAccessToken` must be called in order to initialize the OAuth credentials.
+
+        dropbox.getAccessToken(dropbox_email, dropbox_password, callback)
 
 The callback given to `getAccessToken` takes an error object, an access token, and an access token secret (see example below).
 
 ### Calling API methods
 
-dropbox-node provides methods covering [each of the Dropbox API methods](https://www.dropbox.com/developers/docs), excluding account creation.
-
-For example, to fetch and print the display name and email address associated with your account:
+dropbox-node provides methods covering [each of the Dropbox API methods](https://www.dropbox.com/developers/docs). For example, to fetch and print the display name and email address associated with your account:
 
     dropbox.getAccountInfo(function (err, data) {
       if (err) console.log('Error: ' + err)
       else console.log(data.display_name + ', ' + data.email)
     })
 
-Note that (in most cases) `getAccessToken` must be called prior to interacting with the rest of the Dropbox API. This means that the API methods must be invoked within the callback passed to `getAccessToken` unless it is guaranteed that `getAccessToken` was called previously. As an example of this latter case, if building a web app, one could call API methods directly in a route that can only be accessed after going through a sign-in phase in which a call to `getAccessToken` is made.
+Note that (at least at the start of a user's session) `getAccessToken` must be called prior to interacting with the rest of the Dropbox API. This means that the API methods must be invoked within the callback passed to `getAccessToken` unless it is guaranteed that `getAccessToken` was called previously. As an example of this latter case, if building a web app, one could call API methods directly in a route that can only be accessed after going through a sign-in phase in which a call to `getAccessToken` is made.
 
 Here we upload a file and remotely move it around before deleting it.
 
