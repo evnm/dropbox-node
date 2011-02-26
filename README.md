@@ -2,6 +2,10 @@
 
 An OAuth-enabled Node.js client for working with the Dropbox API.
 
+### DISCLAIMER
+
+The current Dropbox API is targeted for mobile applications, and thus web apps using it aren't "officially supported." Note that the way dropbox-node currently handles the OAuth dance will likely change when the Dropbox web app API becomes available. More info [here](https://www.dropbox.com/developers/web_docs).
+
 ## Installation
 
 dropbox-node depends on [node-oauth](http://github.com/ciaranj/node-oauth).
