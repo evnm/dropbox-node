@@ -1,6 +1,6 @@
 {
   "name": "dropbox",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A node.js client module for the official Dropbox API",
   "keywords": [
     "cloud",
@@ -35,5 +35,6 @@
   },
   "files": [
     ""
-  ]
+  ],
+  "devDependencies": {}
 }
