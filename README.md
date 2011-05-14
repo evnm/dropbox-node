@@ -38,7 +38,7 @@ Before calling any Dropbox API methods, an access token pair must be obtained. T
 
         dropbox.getAccessToken(dropbox_email, dropbox_password, callback)
 
-The callback given to `getAccessToken` takes an error object, an access token, and an access token secret (see example below).
+The callback given to `getAccessToken` takes an error object, an access token, and an access token secret (see example below). **Please note that users' passwords should never be stored.** It is best to acquire a token once and then use it for all subsequent requests.
 
 ### Calling API methods
 
