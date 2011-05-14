@@ -49,7 +49,7 @@ dropbox-node provides methods covering [each of the Dropbox API methods](https:/
       else console.log(data.display_name + ', ' + data.email)
     })
 
-Note that (at least at the start of a user's session) `getAccessToken` must be called prior to interacting with the rest of the Dropbox API. This means that the API methods must be invoked within the callback passed to `getAccessToken` unless it is guaranteed that `getAccessToken` was called previously. As an example of this latter case, if building a web app, one could call API methods directly in a route that can only be accessed after going through a sign-in phase in which a call to `getAccessToken` is made.
+Note that (at least at the start of a user's session) a valid access token pair must be obtained prior to interacting with the rest of the Dropbox API. This means that the API methods must be invoked within the callback passed to `getAccessToken` unless it is guaranteed that `getAccessToken` was called previously. As an example of this latter case, if building a web app, one could call API methods directly in a route that can only be accessed after going through a sign-in phase in which a call to `getAccessToken` is made.
 
 Here we upload a file and remotely move it around before deleting it.
 
@@ -72,7 +72,22 @@ Here we upload a file and remotely move it around before deleting it.
 
 For a more practical example, check out this [walkthrough of building a simple Dropbox file browser](http://evanmeagher.net/2010/10/dropbox-file-browser).
 
-### API method optional argument
+### Stream-based file-downloading
+
+As of v0.3.1, dropbox-node exposes a method `getFileStream` that allows stream-based file-downloading. This is useful when downloading large files that wouldn't easily fit in memory and thus don't play nicely with `getFile`.
+
+`getFileStream` returns an EventEmitter representing the request. The target file will be downloaded in chunks and dealt with according to the callbacks you register. Here we fetch a large file and write it to disk:
+
+    var request = dropbox.getFileStream("path/to/huge/file")
+      , write_stream = require('fs').createWriteStream("out")
+
+    request.on('response', function (response) {
+      res.on('data', function (chunk) { write_stream.write(chunk) })
+      res.on('end', function () { write_stream.end() })
+    })
+    request.end()
+
+### Optional arguments
 
 Optional arguments (as specified in the [Dropbox API documentation](https://www.dropbox.com/developers/docs)) can be given to API methods via an argument object.
 
@@ -80,7 +95,7 @@ For example, here we call `getAccountInfo` and direct the API to include the HTT
 
     dropbox.getAccountInfo({ status_in_response: true }, callback)
 
-Each API method (except `getAccessToken`) can take as optional arguments an access token and an access token secret as strings. This is the one way to get around having to call `getAccessToken` in cases where a valid key pair is known.
+Each method (except `getAccessToken`) can optionally take an access token and an access token secret as strings. This is the one way to get around having to call `getAccessToken` in cases where a valid key pair is known.
 
 For example, here we fetch the metadata about the Dropbox root directory, passing in an explicit key pair stored in variables.
 
@@ -88,12 +103,11 @@ For example, here we fetch the metadata about the Dropbox root directory, passin
 
 ## Testing
 
-dropbox-node depends on [jasmine-node](http://github.com/mhevery/jasmine-node) for testing. Note that the currently-implemented tests are trivial at best.
+dropbox-node depends on [jasmine-node](http://github.com/mhevery/jasmine-node) for testing. Note that the currently-implemented tests are trivial, due to a lack of a way to effectively mock the Dropbox API.
 
 Run specs with `node specs.js` from the root `dropbox-node` directory.
 
 ## TODO
-* Rewrite `getFile` to use streams.
 * Improve test coverage.
 * Improve documentation.
 * Add ability to interact with application sandboxes.
