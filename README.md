@@ -82,8 +82,8 @@ As of v0.3.1, dropbox-node exposes a method `getFileStream` that allows stream-b
       , write_stream = require('fs').createWriteStream("out")
 
     request.on('response', function (response) {
-      res.on('data', function (chunk) { write_stream.write(chunk) })
-      res.on('end', function () { write_stream.end() })
+      response.on('data', function (chunk) { write_stream.write(chunk) })
+      response.on('end', function () { write_stream.end() })
     })
     request.end()
 
