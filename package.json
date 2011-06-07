@@ -21,20 +21,10 @@
   "dependencies": {
     "oauth": ">=0.8.2 <2.0.0"
   },
-  "engine": {
-    "node": ">=0.2.3"
-  },
   "engines": {
     "node": "*"
   },
   "directories": {
     "lib": "./lib"
-  },
-  "modules": {
-    "dropbox-node/index.js": "lib/dropbox-node/index.js"
-  },
-  "files": [
-    ""
-  ],
-  "devDependencies": {}
+  }
 }
