@@ -1,22 +1,23 @@
 {
   "name": "dropbox",
-  "version": "0.3.2",
-  "description": "A node.js client module for the official Dropbox API",
+  "version": "0.4",
+  "description": "Dropbox Node.js module.",
   "keywords": [
     "cloud",
+	"dropbox",
     "storage",
     "REST",
     "interface"
   ],
-  "homepage": "http://github.com/evnm/dropbox-node",
-  "author": "Evan Meagher <evan.meagher@gmail.com> (http://evanmeagher.net/)",
+  "homepage": "http://github.com/ralphholzmann/dropbox-node",
+  "author": "Ralph Holzmann <ralphholzmann@gmail.com>",
   "main": "index",
   "repository": {
     "type": "git",
-    "url": "git://github.com/evnm/dropbox-node.git"
+    "url": "git://github.com/ralphholzmann/dropbox-node.git"
   },
   "scripts": {
-    "test": "node specs.js"
+    "test": "node test/index.js"
   },
   "dependencies": {
     "oauth": ">=0.8.2 <2.0.0",
@@ -28,5 +29,7 @@
   "directories": {
     "lib": "./lib"
   },
-  "devDependencies": {}
+  "devDependencies": {
+	"vows" : ">=0.4.0"
+  }
 }
