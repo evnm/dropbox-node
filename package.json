@@ -19,7 +19,8 @@
     "test": "node specs.js"
   },
   "dependencies": {
-    "oauth": ">=0.8.2 <2.0.0"
+    "oauth": ">=0.8.2 <2.0.0",
+    "underscore": ">=0.8.2"
   },
   "engines": {
     "node": "*"
