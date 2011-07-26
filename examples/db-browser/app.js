@@ -15,10 +15,10 @@ var sys = require('sys')
 // Create and configure an Express server.
 var app = express.createServer();
 app.configure(function () {
-  app.use(express.staticProvider(__dirname + '/public'))
+  app.use(express.static(__dirname + '/public'))
   , app.use(express.logger())
-  , app.use(express.bodyDecoder())
-  , app.use(express.cookieDecoder())
+  , app.use(express.bodyParser())
+  , app.use(express.cookieParser())
   , app.use(express.session({ key: 'skey', secret: '1ts-s3cr3t!'} ));
 });
 

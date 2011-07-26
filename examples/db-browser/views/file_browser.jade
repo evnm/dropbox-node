@@ -4,7 +4,7 @@ ul#dir_contents
   - items.forEach(function(item) {
     li
       - if(item.is_dir)
-        a(href: '/file_browser' + item.path) #{item.path}
+        a(href='/file_browser' + item.path) #{item.path}
       - else
         #{item.path} (#{item.size})
   - })
