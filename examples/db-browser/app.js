@@ -19,7 +19,7 @@ app.configure(function () {
   , app.use(express.logger())
   , app.use(express.bodyParser())
   , app.use(express.cookieParser())
-  , app.use(express.session({ key: 'skey', secret: '1ts-s3cr3t!'} ));
+  , app.use(express.session({ secret: '1ts-s3cr3t!'} ));
 });
 
 // Login page.
@@ -34,9 +34,12 @@ app.get('/', function (req, res) {
 // Dropbox credential processing.
 app.post('/process_creds', function (req, res) {
   // Create a DropboxClient and initialize it with an access token pair.
-  req.session.db = new DropboxClient(consumer_key, consumer_secret);
-  req.session.db.getAccessToken(req.body.email, req.body.password, function (err) {
-    if (err) return console.log('Error: ' + sys.inspect(err));
+  var dropbox = new DropboxClient(consumer_key, consumer_secret);
+  dropbox.getAccessToken(req.body.email,
+                         req.body.password,
+                         function (err, token, secret) {
+    req.session.access_token = token;
+    req.session.access_token_secret = secret;
     res.redirect('/file_browser');
   });
 });
@@ -44,8 +47,12 @@ app.post('/process_creds', function (req, res) {
 // File browser page.
 app.get('/file_browser(/*)?', function (req, res) {
   // Fetch target metadata and render the page.
-  if (req.session.db) {
-    req.session.db.getMetadata(req.params[1] || '', function (err, metadata) {
+  if (req.session.access_token && req.session.access_token_secret) {
+    var dropbox = new DropboxClient(consumer_key,
+                                    consumer_secret,
+                                    req.session.access_token,
+                                    req.session.access_token_secret);
+    dropbox.getMetadata(req.params[1] || '', function (err, metadata) {
       if (err) return console.log('Error: ' + sys.inspect(err));
       res.render('file_browser.jade', {
 	locals: {
