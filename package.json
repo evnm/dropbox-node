@@ -1,6 +1,6 @@
 {
   "name": "dropbox",
-  "version": "0.3.1",
+  "version": "0.4.1",
   "description": "A node.js client module for the official Dropbox API",
   "keywords": [
     "cloud",
@@ -8,12 +8,12 @@
     "REST",
     "interface"
   ],
-  "homepage": "http://github.com/evnm/dropbox-node",
-  "author": "Evan Meagher <evan.meagher@gmail.com> (http://evanmeagher.net/)",
+  "homepage": "http://github.com/crabdude/dropbox-node",
+  "author": "Adam Crabtree <dude@noderiety.com> (http://noderiety.com/)",
   "main": "index",
   "repository": {
     "type": "git",
-    "url": "git://github.com/evnm/dropbox-node.git"
+    "url": "git://github.com/crabdude/dropbox-node.git"
   },
   "scripts": {
     "test": "node specs.js"
