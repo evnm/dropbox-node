@@ -4,7 +4,7 @@ var DropboxClient = require('../lib/dropbox-node').DropboxClient,
 describe('dropbox-node', function() {
   oauth = new  OAuth(null, null, null, null,
                      null, null, 'HMAC-SHA1');
-  
+
   it('sets oauth object', function() {
     var dropbox = new DropboxClient(oauth, null, null);
     expect(dropbox.oauth).toBe(oauth);
