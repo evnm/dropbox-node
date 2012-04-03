@@ -19,7 +19,7 @@
     "test": "node specs.js"
   },
   "dependencies": {
-    "oauth": ">=0.8.2 <2.0.0"
+    "request": "2.9.x"
   },
   "engines": {
     "node": "*"
