@@ -51,7 +51,7 @@ Here we upload a file and remotely move it around before deleting it.
 
     dropbox.getAccessToken(email, pwd, function (err, token, secret) {
       // Upload foo.txt to the Dropbox root directory.
-      dropbox.putFile('foo.txt', '', function (err, data) {
+      dropbox.putFile('foo.txt', 'foo.txt', function (err, data) {
         if (err) return console.error(err)
 
         // Move it into the Public directory.
@@ -96,6 +96,94 @@ Each method (except `getAccessToken`) can optionally take an access token and an
 For example, here we fetch the metadata about the Dropbox root directory, passing in an explicit key pair stored in variables.
 
     dropbox.getMetadata('', { token: token, secret: secret }, callback)
+
+## API
+
+### new DropboxClient()
+
+### DropboxClient#getAccessToken(email, password, callback(err, access_token, access_token_secret))
+
+Fetches an access token and secret based on the email and password given. Stores the token and secret in the DropboxClient instance and calls the callback them.
+
+### DropboxClient#getAccountInfo([optargs], callback(err, accountInfo))
+https://www.dropbox.com/developers/reference/api#account-info
+
+Gets account information from the client.
+
+### DropboxClient#createAccount(email, first_name, last_name, password, [optargs], callback(err, accountInfo))
+
+Creates a new Dropbox account.
+
+### DropboxClient#getFile(path, [optargs], [callback(err, body)])
+https://www.dropbox.com/developers/reference/api#files-GET
+
+Retrieves a file specified by the path. `callback` will be called with a possible error and the buffer of the contents of the file. This method also returns a readable stream that can be used to pipe the contents.
+
+```js
+dropboxClient('mybigfile.mpeg').pipe(fs.createWriteStream('localbigfile.mpeg');
+```
+
+`optargs` can also have a `rev` field to specify the revision of the file to download, and `range` for [HTTP Range Retrieval Requests](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.2).
+
+```js
+// download the first 1024 byte
+dropboxClient('file.zip', { range: 'bytes=0-1024'}, function(err, data) {
+  console.log(data.length); // 1024. that is if the file is at least 1024 bytes
+});
+```
+
+### DropboxClient#putFile(filepath, remotepath, [optargs], callback(err, metadata))
+https://www.dropbox.com/developers/reference/api#files_put
+
+Uploads a file specified by `filepath` to `remotepath` on Dropbox. Dropbox currently does not support streaming uploads, and the max upload is 150 MB. `optargs` can also take additional fields `overwrite` and `parent_rev`.
+
+### DropboxClient#put(contents, remotepath, [optargs], callback(err, metadata))
+o
+Similar to `putFile()` but places `contents` into a created file at `remotepath`. `contents` can be a buffer or string.
+
+### DropboxClient#getMetadata(path, [optargs], callback(err, metadata))
+https://www.dropbox.com/developers/reference/api#metadata
+
+Gets metadata of file/folder specified by `path`. `optargs` can have fields `hash`, `list`, `include_deleted` and `rev`.
+
+### DropboxClient#delta([cursor], [optargs], callback(err, changes))
+https://www.dropbox.com/developers/reference/api#delta
+
+Keeps up with changes from a client's Dropbox. `changes` is an array of arrays with first element as the path and second as metadata.
+
+### DropboxClient#changesStream([startingCursor], [optargs])
+Convenient method that provides a more friendly API to `delta()`. Returns an event emitter that emits `data` events with `path` and `metadata` parameters on changes to the client's Dropbox. Also can emit `reset` and `error` events. The returned event emitter also has a `pause()` and `resume()` methods.
+
+### DropboxClient#search(folderpath, query, [optargs], callback(err, results))
+https://www.dropbox.com/developers/reference/api#search
+
+Searches `folderpath` for files matching `query`. `results` is an array of metadata. `optargs` can take `file_limit` and `include_deleted`.
+
+### DropboxClient#getThumbnail(filepath, [optargs], [callback(err, body, metadata)])
+https://www.dropbox.com/developers/reference/api#thumbnails
+
+Downloads a thumbnail image located at `filepath`. Like `getFile()`, the `callback` can get buffered data or the returned readable stream can be piped. `optargs` can take `format` and `size` fields.
+
+### DropboxClient#copy(from_path, to_path, [optargs], callback)
+https://www.dropbox.com/developers/reference/api#fileops-copy
+
+Copies a file. `from_copy_ref` field can be given in `optargs` to use it instead of `from_path`.
+
+### DropboxClient#createFolder(path, [optargs], callback(err, metadata))
+https://www.dropbox.com/developers/reference/api#fileops-create-folder
+
+Creates a folder at the given path.
+
+### DropboxClient#deleteItem(path, [optargs], callback(err, metadata))
+https://www.dropbox.com/developers/reference/api#fileops-delete
+
+Deletes file or folder from path.
+
+### DropboxClient#move(from_path, to_path, [optargs], callback(err, metadata))
+https://www.dropbox.com/developers/reference/api#fileops-move
+
+Moves a file to another path.
+
 
 ## Testing
 
