@@ -10,6 +10,9 @@
   ],
   "homepage": "http://github.com/evnm/dropbox-node",
   "author": "Evan Meagher <evan.meagher@gmail.com> (http://evanmeagher.net/)",
+  "contributors": [
+    "Roly Fentanes (https://github.com/fent)"
+  ],
   "main": "index",
   "repository": {
     "type": "git",
@@ -19,7 +22,7 @@
     "test": "node specs.js"
   },
   "dependencies": {
-    "oauth": ">=0.8.2 <2.0.0"
+    "request": "2.9.x"
   },
   "engines": {
     "node": "*"
