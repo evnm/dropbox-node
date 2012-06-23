@@ -1,5 +1,5 @@
 var jasmine = require('jasmine'),
-    sys = require('sys');
+    util = require('util');
 
 for (var key in jasmine) {
   global[key] = jasmine[key];
