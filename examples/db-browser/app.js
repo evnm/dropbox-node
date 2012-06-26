@@ -7,7 +7,7 @@ if (consumer_key == undefined || consumer_secret == undefined) {
   process.exit(1);
 }
 
-var sys = require('sys')
+var util = require('util')
   , DropboxClient = require('../../lib/dropbox-node').DropboxClient
   ,  express = require('express')
   ,  app = express.createServer();
@@ -53,7 +53,7 @@ app.get('/file_browser(/*)?', function (req, res) {
                                     req.session.access_token,
                                     req.session.access_token_secret);
     dropbox.getMetadata(req.params[1] || '', function (err, metadata) {
-      if (err) return console.log('Error: ' + sys.inspect(err));
+      if (err) return console.log('Error: ' + util.inspect(err));
       res.render('file_browser.jade', {
 	locals: {
 	  title: 'Dropbox File Browser'
