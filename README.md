@@ -68,21 +68,6 @@ Here we upload a file and remotely move it around before deleting it.
 
 For a more practical example, check out this [walkthrough of building a simple Dropbox file browser](http://evanmeagher.net/2010/10/dropbox-file-browser).
 
-### Stream-based file-downloading
-
-As of v0.3.1, dropbox-node exposes a method `getFileStream` that allows stream-based file-downloading. This is useful when downloading large files that wouldn't easily fit in memory and thus don't play nicely with `getFile`.
-
-`getFileStream` returns an EventEmitter representing the request. The target file will be downloaded in chunks and dealt with according to the callbacks you register. Here we fetch a large file and write it to disk:
-
-    var request = dropbox.getFileStream("path/to/huge/file")
-      , write_stream = require('fs').createWriteStream("out")
-
-    request.on('response', function (response) {
-      response.on('data', function (chunk) { write_stream.write(chunk) })
-      response.on('end', function () { write_stream.end() })
-    })
-    request.end()
-
 ### Optional arguments
 
 Optional arguments (as specified in the [Dropbox API documentation](https://www.dropbox.com/developers/docs)) can be given to API methods via an argument object.
