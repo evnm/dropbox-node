@@ -20,16 +20,13 @@
     "test": "node test/index.js"
   },
   "dependencies": {
-    "oauth": "https://github.com/ralphholzmann/oauth/tarball/master",
     "underscore": ">=0.8.2"
+    "underscore.Deferred": ">=0.0.1"
   },
   "engines": {
     "node": "*"
   },
   "directories": {
     "lib": "./lib"
-  },
-  "devDependencies": {
-	"vows" : ">=0.4.0"
   }
 }
