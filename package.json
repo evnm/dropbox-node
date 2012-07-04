@@ -20,7 +20,7 @@
     "test": "node test/index.js"
   },
   "dependencies": {
-    "underscore": ">=0.8.2"
+    "underscore": ">=0.8.2",
     "underscore.Deferred": ">=0.0.1"
   },
   "engines": {
