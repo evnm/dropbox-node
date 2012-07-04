@@ -22,7 +22,8 @@
   "dependencies": {
     "oauth": "https://github.com/ralphholzmann/oauth/tarball/master",
     "underscore": ">=0.8.2",
-    "underscore.Deferred": ">=0.0.1"
+    "underscore.Deferred": ">=0.0.1",
+    "mime" : ">=1.2.5"
   },
   "engines": {
     "node": "*"
