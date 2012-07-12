@@ -149,6 +149,16 @@ https://www.dropbox.com/developers/reference/api#thumbnails
 
 Downloads a thumbnail image located at `filepath`. Like `getFile()`, the `callback` can get buffered data or the returned readable stream can be piped. `optargs` can take `format` and `size` fields.
 
+### DropboxClient#shares(path, [optargs], [callback(err, link)])
+https://www.dropbox.com/developers/reference/api#shares
+
+Creates and gets a link to file/folder specified by `path`.
+
+### DropboxClient#media(filepath, [optargs], [callback(err, link)])
+https://www.dropbox.com/developers/reference/api#media
+
+Creates and gets a direct link to file specified by `filepath`.
+
 ### DropboxClient#copy(from_path, to_path, [optargs], callback)
 https://www.dropbox.com/developers/reference/api#fileops-copy
 
