@@ -1,5 +1,5 @@
 {
-  "name": "dropbox",
+  "name": "dropbox-node",
   "version": "0.4.0",
   "description": "A node.js client module for the official Dropbox API",
   "keywords": [
