@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/evnm/dropbox-node.png)](http://travis-ci.org/evnm/dropbox-node)
 # dropbox-node
 
 An OAuth-enabled Node.js client for working with the Dropbox API.
