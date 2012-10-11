@@ -2,6 +2,10 @@
 
 An OAuth-enabled Node.js client for working with the Dropbox API.
 
+## DISCLAIMER
+
+This project has been deprecated in favor of [Dropbox's official JavaScript library](https://github.com/dropbox/dropbox-js).
+
 ## Installation
 
 dropbox-node depends on [node-oauth](http://github.com/ciaranj/node-oauth).
