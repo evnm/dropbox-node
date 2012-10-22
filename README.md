@@ -12,7 +12,7 @@ dropbox-node depends on [node-oauth](http://github.com/ciaranj/node-oauth).
 
 To install via npm
 
-    npm install dropbox
+    npm install dropbox-node
 
 To install by hand, download the module and create a symlink in `~/.node_libraries`
 
