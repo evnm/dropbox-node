@@ -20,7 +20,7 @@ To install by hand, download the module and create a symlink in `~/.node_librari
 
 ## Usage
 
-To start, grab a consumer key and secret from [dropbox.com/developers](https://dropbox.com/developers).
+To start, grab a consumer key and secret from [dropbox.com/developers](https://www.dropbox.com/developers).
 
 ### Object construction and access key pair retrieval
 First construct a DropboxClient object, passing in the consumer key and secret.
@@ -32,7 +32,11 @@ Before calling any Dropbox API methods, an access token pair must be obtained. T
   1. If the access token and secret are known a priori, they can be passed directly into the DropboxClient constructor.
 
         var dropbox = new DropboxClient(consumer_key, consumer_secret,
-                                        access_token, access_token_secret)
+                                        access_token, access_token_secret, {sandbox: true})
+                                        
+option: sandbox (default is false)
+true: Read/Write App folder
+false: Read any folder/file of dropbox                                        
 
   2. Otherwise, `getAccessToken` must be called in order to initialize the OAuth credentials.
 
@@ -42,7 +46,7 @@ The callback given to `getAccessToken` takes an error object, an access token, a
 
 ### Calling API methods
 
-dropbox-node provides methods covering [each of the Dropbox API methods](https://www.dropbox.com/developers/docs). For example, to fetch and print the display name and email address associated with your account:
+dropbox-node provides methods covering [each of the Dropbox API methods](https://www.dropbox.com/developers/core/docs). For example, to fetch and print the display name and email address associated with your account:
 
     dropbox.getAccountInfo(function (err, data) {
       if (err) console.log('Error: ' + err)
@@ -74,7 +78,7 @@ For a more practical example, check out this [walkthrough of building a simple D
 
 ### Optional arguments
 
-Optional arguments (as specified in the [Dropbox API documentation](https://www.dropbox.com/developers/docs)) can be given to API methods via an argument object.
+Optional arguments (as specified in the [Dropbox API documentation](https://www.dropbox.com/developers/core/docs)) can be given to API methods via an argument object.
 
 For example, here we call `getAccountInfo` and direct the API to include the HTTP status code in the response.
 
@@ -86,6 +90,8 @@ For example, here we fetch the metadata about the Dropbox root directory, passin
 
     dropbox.getMetadata('', { token: token, secret: secret }, callback)
 
+
+ 
 ## API
 
 ### new DropboxClient()
@@ -95,7 +101,7 @@ For example, here we fetch the metadata about the Dropbox root directory, passin
 Fetches an access token and secret based on the email and password given. Stores the token and secret in the DropboxClient instance and calls the callback them.
 
 ### DropboxClient#getAccountInfo([optargs], callback(err, accountInfo))
-https://www.dropbox.com/developers/reference/api#account-info
+https://www.dropbox.com/developers/core/docs#account-info
 
 Gets account information from the client.
 
@@ -104,7 +110,7 @@ Gets account information from the client.
 Creates a new Dropbox account.
 
 ### DropboxClient#getFile(path, [optargs], [callback(err, body)])
-https://www.dropbox.com/developers/reference/api#files-GET
+https://www.dropbox.com/developers/core/docs#files-GET
 
 Retrieves a file specified by the path. `callback` will be called with a possible error and the buffer of the contents of the file. This method also returns a readable stream that can be used to pipe the contents.
 
@@ -122,7 +128,7 @@ dropboxClient('file.zip', { range: 'bytes=0-1024'}, function(err, data) {
 ```
 
 ### DropboxClient#putFile(filepath, remotepath, [optargs], callback(err, metadata))
-https://www.dropbox.com/developers/reference/api#files_put
+https://www.dropbox.com/developers/core/docs#files_put
 
 Uploads a file specified by `filepath` to `remotepath` on Dropbox. Dropbox currently does not support streaming uploads, and the max upload is 150 MB. `optargs` can also take additional fields `overwrite` and `parent_rev`.
 
@@ -131,12 +137,12 @@ o
 Similar to `putFile()` but places `contents` into a created file at `remotepath`. `contents` can be a buffer or string.
 
 ### DropboxClient#getMetadata(path, [optargs], callback(err, metadata))
-https://www.dropbox.com/developers/reference/api#metadata
+https://www.dropbox.com/developers/core/docs#metadata
 
 Gets metadata of file/folder specified by `path`. `optargs` can have fields `hash`, `list`, `include_deleted` and `rev`.
 
 ### DropboxClient#delta([cursor], [optargs], callback(err, changes))
-https://www.dropbox.com/developers/reference/api#delta
+https://www.dropbox.com/developers/core/docs#delta
 
 Keeps up with changes from a client's Dropbox. `changes` is an array of arrays with first element as the path and second as metadata.
 
@@ -144,42 +150,42 @@ Keeps up with changes from a client's Dropbox. `changes` is an array of arrays w
 Convenient method that provides a more friendly API to `delta()`. Returns an event emitter that emits `data` events with `path` and `metadata` parameters on changes to the client's Dropbox. Also can emit `reset` and `error` events. The returned event emitter also has a `pause()` and `resume()` methods.
 
 ### DropboxClient#search(folderpath, query, [optargs], callback(err, results))
-https://www.dropbox.com/developers/reference/api#search
+https://www.dropbox.com/developers/core/docs#search
 
 Searches `folderpath` for files matching `query`. `results` is an array of metadata. `optargs` can take `file_limit` and `include_deleted`.
 
 ### DropboxClient#getThumbnail(filepath, [optargs], [callback(err, body, metadata)])
-https://www.dropbox.com/developers/reference/api#thumbnails
+https://www.dropbox.com/developers/core/docs#thumbnails
 
 Downloads a thumbnail image located at `filepath`. Like `getFile()`, the `callback` can get buffered data or the returned readable stream can be piped. `optargs` can take `format` and `size` fields.
 
 ### DropboxClient#shares(path, [optargs], [callback(err, link)])
-https://www.dropbox.com/developers/reference/api#shares
+https://www.dropbox.com/developers/core/docs#shares
 
 Creates and gets a link to file/folder specified by `path`.
 
 ### DropboxClient#media(filepath, [optargs], [callback(err, link)])
-https://www.dropbox.com/developers/reference/api#media
+https://www.dropbox.com/developers/core/docs#media
 
 Creates and gets a direct link to file specified by `filepath`.
 
 ### DropboxClient#copy(from_path, to_path, [optargs], callback)
-https://www.dropbox.com/developers/reference/api#fileops-copy
+https://www.dropbox.com/developers/core/docs#fileops-copy
 
 Copies a file. `from_copy_ref` field can be given in `optargs` to use it instead of `from_path`.
 
 ### DropboxClient#createFolder(path, [optargs], callback(err, metadata))
-https://www.dropbox.com/developers/reference/api#fileops-create-folder
+https://www.dropbox.com/developers/core/docs#fileops-create-folder
 
 Creates a folder at the given path.
 
 ### DropboxClient#deleteItem(path, [optargs], callback(err, metadata))
-https://www.dropbox.com/developers/reference/api#fileops-delete
+https://www.dropbox.com/developers/core/docs#fileops-delete
 
 Deletes file or folder from path.
 
 ### DropboxClient#move(from_path, to_path, [optargs], callback(err, metadata))
-https://www.dropbox.com/developers/reference/api#fileops-move
+https://www.dropbox.com/developers/core/docs#fileops-move
 
 Moves a file to another path.
 
