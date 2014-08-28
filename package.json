@@ -22,7 +22,7 @@
     "test": "node specs.js"
   },
   "dependencies": {
-    "request": "2.9.x"
+    "request": "2.40.0"
   },
   "engines": {
     "node": "*"
